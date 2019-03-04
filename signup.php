@@ -13,7 +13,7 @@ require 'header_files/form/signin_form.php';
 	<header>
 		<nav>
 			<div class="top_nav">
-				<img class="logo" src="styling/img/rsb.png">
+				<img class="logo" src="styling/img/rsb2.png">
 				<div class="signin_form">
 					<form action="signup.php" method="POST">
 						<input type="email" name="signin_email" placeholder=" Email" value="<?php
