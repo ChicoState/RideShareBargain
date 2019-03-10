@@ -23,7 +23,8 @@ if (isset($_SESSION['username'])) {
 <body>
 	<div class="top_nav_bar">
 		<div class="logo">
-			<a href="index.php"><img class="image" src="styling/img/rsb.png"></a>
+			<!-- <b><a href="index.php">RSB</a></b> -->
+			<a href="index.php"><img class="image" src="styling/img/rsb2.png"></a>
 		</div>
 		<nav>
 			<a href="<?php echo $user_signin;?>">
