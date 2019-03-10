@@ -117,3 +117,37 @@ nav a:hover {
     text-align: center;
     padding: 20px 20px 20px 20px;
 }
+
+.big_profile {
+	float: left;
+	font-size: 20px;
+	margin: 0 auto;
+	top: 70px;
+	position: relative;
+	padding: 0 10px;
+	width: 260px;
+	height: auto;
+	text-align: center;
+}
+
+.profile_info_p p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#pro_img {
+	margin-top: 40px;
+	width: 250px;
+	height: 250px;
+	border-radius: 100%;
+	margin-bottom: 20px;
+}
+
+.profile_info_p {
+	margin-top: 20px;
+	text-decoration: none;
+	margin-bottom: 40px;
+}
+.index_user_profile a {
+	text-decoration: none;
+}

@@ -37,7 +37,7 @@ if (isset($_SESSION['username'])) {
 			<a href="#"><i class="fas fa-envelope"></i></a>
 			<a href="#"><i class="fas fa-car-alt"></i></a>
 			<a href="#"><i id="settings" class="fas fa-cog"></i></a>
-			<a>Contact</a>
+			<a href="out.php"><i class="fas fa-sign-out-alt"></i></a>
 		</nav>
 	</div>
 	<div class="little_profile">
@@ -51,16 +51,31 @@ if (isset($_SESSION['username'])) {
 						echo $user['firstname'] . " " . $user['lastname'] . "<br>";
 					?>
 				</a>
-				<?php echo "Driver Rating : " . $user['rating_driver'] . "<br>";?>
-				<?php echo "Rider Rating : " . $user['rating_rider'];?>
+				<div class=profile_info>
+					<?php echo "Driver Rating : " . $user['rating_driver'] . "<br>";?>
+					<?php echo "Rider Rating : " . $user['rating_rider'];?>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="newsfeed column">
-		<form class="create_post" action="index.php" method="POST">
+		<form class="create_post" action="addComment.php" method="POST">
 			<textarea name="new_text" id="new_text" placeholder="What's on your mind, <?php echo $user['firstname'];?>?"></textarea>
 			<input type="submit" name="new_post" id="post_button" value="Post">
 		</form>
 	</div>
+	<table>
+		<?php
+			$sql = "SELECT content FROM comments WHERE owner = '$user_signin '";
+			$query = mysqli_query($con, $sql);
+			while ($row = mysqli_fetch_row($query)) {
+				echo "<tr>";
+				echo ('<div class="newsfeed column">');
+			  echo stripslashes(utf8_decode($row[0]));
+			}
+			echo "</div>";
+			echo "</tr>";
+		?>
+	</table>
 </body>
 </html>
