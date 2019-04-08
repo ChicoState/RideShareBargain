@@ -6,9 +6,8 @@
 	border-bottom: 5px solid  black;
 	margin: 0 0 10px 0;
 	display: inline-flex;
-	position: relative;
+	position: fixed;
 	z-index: 10;
-	float: left;
 }
 
 
@@ -150,5 +149,89 @@ nav a:hover {
 	margin-bottom: 40px;
 }
 .index_user_profile a {
+	text-decoration: none;
+}
+
+.status_post {
+	width: 96%;
+	font-size: 15px;
+	padding: 0px 5px;
+	min-width: 75px;
+}
+
+.post_profile_pic {
+	float: left;
+	margin-right: 7px;
+}
+
+.post_profile_pic img {
+	border-radius: 100%;
+}
+
+#comment {
+	max-height: 250px;
+	width: 100%;
+	background-color: #D3D3D3;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+.comment_section {
+	padding: 0 5px 5px 5px;
+}
+
+.comment_section a {
+	color: green;
+	text-decoration: none;
+}
+
+.comment_section a:hover {
+	color: green;
+	text-decoration: underline;
+}
+
+#comment_form {
+	display: inline-block;
+	width: 100%;
+}
+
+#comment_form textarea {
+	width: 75%;
+	height: 30px;
+	border-radius: 5px;
+	margin-right: 5px;
+	margin-top: 12px;
+	margin-left: 5%;
+	border: 1px solid black;
+	font-size: 12px;
+	float: left;
+}
+
+#comment_post_b {
+	width: 60px;
+	margin-top: 12px;
+	background-color: #000000;
+	color: #FFFFFF;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#hr {
+	width: 80%;
+	margin: 5px 10%;
+	color : white;
+}
+
+.com {
+	display: inline-block;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: #C0C0C0;
+	color: black;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
 	text-decoration: none;
 }

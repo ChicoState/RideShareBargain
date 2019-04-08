@@ -1,6 +1,9 @@
 <?php
 
 require 'configurations/config.php';
+// include('User.php');
+// include('Post.php');
+// include('chat.php');
 
 if (isset($_SESSION['username'])) {
 	$user_signin = $_SESSION['username'];
@@ -24,10 +27,11 @@ if (isset($_SESSION['username'])) {
 <body>
 	<div class="top_nav_bar">
 		<div class="logo">
+			<!-- <b><a href="index.php">RSB</a></b> -->
 			<a href="index.php"><img class="image" src="styling/img/rsb.png"></a>
 		</div>
 		<nav>
-			<a href="#">
+			<a href="<?php echo $user_signin;?>">
 				<?php
 					echo $user['firstname'];
 				?>
@@ -37,7 +41,6 @@ if (isset($_SESSION['username'])) {
 			<a href="#"><i class="fas fa-envelope"></i></a>
 			<a href="#"><i class="fas fa-car-alt"></i></a>
 			<a href="#"><i id="settings" class="fas fa-cog"></i></a>
-			<a>Contact</a>
+			<a href="signout.php"><i class="fas fa-sign-out-alt"></i></a>
 		</nav>
 	</div>
-	<div class="little_profile">
