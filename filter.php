@@ -109,8 +109,8 @@ if (isset($_SESSION['username'])) {
 	 <p align="center" class="search_input">
 	
 		
-		<input type="text" placeholder="Search From Posted Date" id="from" name="search[from]"  value="<?php echo $from; ?>" class="input-control" />
-	    <input type="text" placeholder="To Posted Date" id="destination" name="search[destination]" style="margin-left:10px"  value="<?php echo $destination; ?>" class="input-control"  />			 
+		<input type="text" placeholder="Search From starting Location" id="from" name="search[from]"  value="<?php echo $from; ?>" class="input-control" />
+	    <input type="text" placeholder="To Destination" id="destination" name="search[destination]" style="margin-left:10px"  value="<?php echo $destination; ?>" class="input-control"  />			 
 		<input type="submit" name="go" value="Search" >
 		
 	
