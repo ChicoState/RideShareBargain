@@ -14,6 +14,7 @@ if (isset($_SESSION['username'])) {
 <html>
 <head>
 	<title>RideShareBargain</title>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="styling/javascript/bootstrap.js"></script>
 	<link rel="stylesheet" type="text/css" href="styling/css/bootstrap.css">
@@ -40,32 +41,36 @@ if (isset($_SESSION['username'])) {
 			<a href="signout.php"><i class="fas fa-sign-out-alt"></i></a>
 		</nav>
 	</div>
-	<?php
+	
+
+<?php
 	$conn = mysqli_connect("localhost", "root", "", "rsb");
 	
-	$post_at = "";
-	$post_at_to_date = "";
+	$from = "";
+	$destination = "";
 	
-	$queryCondition = "";
-	if(!empty($_POST["search"]["post_at"])) {			
-		$post_at = $_POST["search"]["post_at"];
-		list($fid,$fim,$fiy) = explode("-",$post_at);
+	$queryCondition1 = "";
+	if(!empty($_POST["search"]["from"])) {
+			$from = $_POST["search"]["from"];
+			list($from) = explode("-",$_POST["search"]["from"]);
+			$from1 = "$from";
 		
-		$post_at_todate = date('Y-m-d');
-		if(!empty($_POST["search"]["post_at_to_date"])) {
-			$post_at_to_date = $_POST["search"]["post_at_to_date"];
-			list($tid,$tim,$tiy) = explode("-",$_POST["search"]["post_at_to_date"]);
-			$post_at_todate = "$tiy-$tim-$tid";
+		
+		if(!empty($_POST["search"]["destination"])) {
+			$destination = $_POST["search"]["destination"];
+			list($destination) = explode("-",$_POST["search"]["destination"]);
+			$destination1 = "$destination";
 		}
 		
-		$queryCondition .= "WHERE date BETWEEN '$fiy-$fim-$fid' AND '" . $post_at_todate . "'";
+		$queryCondition .= "WHERE destination like '$destination'";
 	}
 	if($_POST)
 	{
-	$sql = "SELECT * from comments " . $queryCondition . " ORDER BY date desc";
-	$result = mysqli_query($conn,$sql);
+	$sql = "SELECT * from posts " . $queryCondition . " ORDER BY ridedate asc";
+	$result2 = mysqli_query($conn,$sql);
 	}
 ?>
+
 
 <html>
 	<head>
@@ -78,13 +83,14 @@ if (isset($_SESSION['username'])) {
 	.table-content th {padding:5px 20px; background: #F0F0F0;vertical-align:top;} 
 	.table-content td {padding:10px 25px; border-bottom: #F0F0F0 1px solid;vertical-align:top;} 
 	input[type=text], select {
-  width:25%;
+  width:20%;
   padding: 10px 30px;
-  margin: 8px 0;
+  margin: 10px 2;
   
 
-  border-radius: 10px;
+  border-radius: 15px;
   box-sizing: border-box;
+  .destination{center
   
 }
 
@@ -93,32 +99,56 @@ if (isset($_SESSION['username'])) {
 	</head>
 	
 	<body>
+	
+	
     <div class="filter-ride">
-		<h2 class="Searh4Ride">Search for a Ride!</h2>
+	<br>
+	<br><br>
+		<h2 align="center" class="Searh4Ride">Search for a Ride!</h2>
   <form name="frmSearch" method="post" action="">
-	 <p class="search_input">
-		<input type="text" placeholder="From Date" id="post_at" name="search[post_at]"  value="<?php echo $post_at; ?>" class="input-control" />
-	    <input type="text" placeholder="To Date" id="post_at_to_date" name="search[post_at_to_date]" style="margin-left:10px"  value="<?php echo $post_at_to_date; ?>" class="input-control"  />			 
+	 <p align="center" class="search_input">
+	
+		
+		<input type="text" placeholder="Search From Posted Date" id="from" name="search[from]"  value="<?php echo $from; ?>" class="input-control" />
+	    <input type="text" placeholder="To Posted Date" id="destination" name="search[destination]" style="margin-left:10px"  value="<?php echo $destination; ?>" class="input-control"  />			 
 		<input type="submit" name="go" value="Search" >
-	</p>
-<?php if(!empty($result))	 { ?>
+		
+	
+ 
+<?php if(!empty($result2))	 { ?>
 <table class="table-content">
           <thead>
         <tr>
                       
-          <th width="30%"><span>Owner</span></th>
-          <th width="50%"><span>Description</span></th>          
-          <th width="20%"><span>Date Ride Posted</span></th>	  
+          <th width="10%"><span>Driver Name</span></th>
+          <th width="10%"><span>Starting Location</span></th>          
+          <th width="10%"><span>Destination</span></th>
+          <th width="10%"><span>Price</span></th>
+          <th width="10%"><span>Day were leaving</span></th>          
+          <th width="10%"><span>Planned leaving time</span></th>	
+          <th width="10%"><span>Driver Preferences</span></th>
+          <th width="10%"><span>Date Ride Posted</span></th>			  
         </tr>
       </thead>
     <tbody>
 	<?php
-		while($row = mysqli_fetch_array($result)) {
+		while($row = mysqli_fetch_array($result2)) {
 	?>
         <tr>
+			
 			<td><?php echo $row["owner"]; ?></td>
-			<td><?php echo $row["content"]; ?></td>
+			<td><?php echo $row["from"]; ?></td>
+			<td><?php echo $row["destination"]; ?></td>
+			<td><?php echo $row["price"]; ?></td>
+			<td><?php echo $row["ridedate"]; ?></td>
+			<td><?php echo $row["ridetime"]; ?></td>
+			<td><?php echo $row["body"]; ?></td>
 			<td><?php echo $row["date"]; ?></td>
+             <td><a href="<?php echo $row['owner'];?>">Click to view Drivers profile!</a></td>
+
+
+
+			
 
 		</tr>
    <?php
@@ -130,24 +160,13 @@ if (isset($_SESSION['username'])) {
   </form>
   </div>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script>
-$.datepicker.setDefaults({
-showOn: "button",
-buttonImage: "datepicker.png",
-buttonText: "Date Picker",
-buttonImageOnly: true,
-dateFormat: 'dd-mm-yy'  
-});
-$(function() {
-$("#post_at").datepicker();
-$("#post_at_to_date").datepicker();
-});
-</script>
+
 	
 	<div>
 
 
 </div>
+
 
 </body>
 </html>
