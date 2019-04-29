@@ -120,14 +120,16 @@ if (isset($_SESSION['username'])) {
           <thead>
         <tr>
                       
-          <th width="10%"><span>Driver Name</span></th>
-          <th width="10%"><span>Starting Location</span></th>          
+          <th width="8%"><span>Driver Name</span></th>
+          <th width="9%"><span>Starting Location</span></th>          
           <th width="10%"><span>Destination</span></th>
-          <th width="10%"><span>Price</span></th>
-          <th width="10%"><span>Day were leaving</span></th>          
+          <th width="5%"><span>Price</span></th>
+          <th width="10%"><span>Planned leaving day</span></th>          
           <th width="10%"><span>Planned leaving time</span></th>	
           <th width="10%"><span>Driver Preferences</span></th>
-          <th width="10%"><span>Date Ride Posted</span></th>			  
+          <th width="10%"><span>Date Ride Posted</span></th>	
+          <th width="15%"><span>Drivers Profile</span></th>			  
+		  
         </tr>
       </thead>
     <tbody>
@@ -144,7 +146,7 @@ if (isset($_SESSION['username'])) {
 			<td><?php echo $row["ridetime"]; ?></td>
 			<td><?php echo $row["body"]; ?></td>
 			<td><?php echo $row["date"]; ?></td>
-             <td><a href="<?php echo $row['owner'];?>">Click to view Drivers profile!</a></td>
+             <td><a href="<?php echo $row['owner'];?>">Click Here to Bargain!</a></td>
 
 
 
