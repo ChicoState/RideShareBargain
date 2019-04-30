@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2019 at 09:16 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: May 01, 2019 at 12:24 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,7 +43,8 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES
 (1, 'anis', 'anis_sahnoun', 'vc', '2019-02-26 00:00:00', 1),
-(2, 'kais', 'anis_sahnoun', 'anis_sahnoun', '2019-04-08 15:06:11', 1);
+(2, 'kais', 'anis_sahnoun', 'anis_sahnoun', '2019-04-08 15:06:11', 1),
+(3, '', 'brandon_ekbatani', 'brandon_ekbatani', '2019-04-29 00:14:03', 15);
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE `likes` (
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
-  `from` varchar(20) NOT NULL,
+  `start` varchar(20) NOT NULL,
   `destination` varchar(20) NOT NULL,
   `price` int(11) NOT NULL,
   `ridedate` date NOT NULL,
@@ -83,11 +84,11 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `from`, `destination`, `price`, `ridedate`, `ridetime`, `body`, `owner`, `reciever`, `date`, `user_closed`, `deleted`, `likes`) VALUES
-(12, 'Chico', 'Sacramento', 5, '2019-04-23', '01:00:00', 'no pets', 'anis_sahnoun', 'none', '2019-04-22 17:48:48', 'no', 'no', 0),
+INSERT INTO `posts` (`id`, `start`, `destination`, `price`, `ridedate`, `ridetime`, `body`, `owner`, `reciever`, `date`, `user_closed`, `deleted`, `likes`) VALUES
+(12, 'Torrance', 'Redondo Beach', 5, '2019-04-23', '01:00:00', 'no pets', 'anis_sahnoun', 'none', '2019-04-22 17:48:48', 'no', 'no', 0),
 (13, 'Chico', 'Sacramento', 45, '2019-04-26', '13:00:00', 'no smokers', 'anis_sahnoun', 'none', '2019-04-22 17:50:08', 'no', 'no', 0),
-(14, 'Chico', 'Sacramento', 50, '2019-04-25', '13:00:00', 'No pets', 'anis_sahnoun', 'none', '2019-04-23 11:23:27', 'no', 'no', 0),
-(15, 'Sacramento', 'SF', 30, '2019-04-27', '13:00:00', 'no pets', 'anis_sahnoun', 'none', '2019-04-24 12:11:16', 'no', 'no', 0);
+(14, 'Chico', 'SF', 50, '2019-04-25', '13:00:00', 'No pets', 'anis_sahnoun', 'none', '2019-04-23 11:23:27', 'no', 'no', 0),
+(15, 'Wyoming ', 'Venice', 30, '2019-04-27', '13:00:00', 'no pets', 'brandon_ekbatani', 'none', '2019-04-24 12:11:16', 'no', 'no', 0);
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,8 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `email`, `passwo
 (20, 'Smit', 'Con', 'smit_con', 'smit@gmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-08', 'styling/img/profile_pic/default_pics/default.png', 1, 'no', 0, 0, ','),
 (21, 'Anis', 'Sahnoun', 'anis_sahnoun_1', 'asahnoun@mail.csuchico.edu', '6a69c91295821e0db570839718f759a1', '2019-04-10', 'styling/img/profile_pic/007712303a96706e6acb32d08528dda6.jpg', 2, 'no', 0, 0, ','),
 (22, 'Anis', 'Sahnoun', 'anis_sahnoun_1_2', 'sahnoun@mail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-10', 'styling/img/profile_pic/a366e0979d9742328a8aac4035d4db78.jpg', 1, 'no', 0, 0, ','),
-(24, 'Anis', 'Sahnoun', 'anis_sahnoun_1_2_3', 'anis@gmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-10', 'styling/img/profile_pic/0a7a9cb73572727064c434fbb6cb2835.jpg', 1, 'no', 0, 0, ',');
+(24, 'Anis', 'Sahnoun', 'anis_sahnoun_1_2_3', 'anis@gmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-10', 'styling/img/profile_pic/0a7a9cb73572727064c434fbb6cb2835.jpg', 1, 'no', 0, 0, ','),
+(25, 'Brandon', 'Ekbatani', 'brandon_ekbatani', 'dummy@mail.com', 'b64093964d277ba6415719648594ef3a', '2019-04-28', 'styling/img/profile_pic/default_pics/default.png', 6, 'no', 0, 0, ',');
 
 --
 -- Indexes for dumped tables
@@ -185,7 +187,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -209,7 +211,7 @@ ALTER TABLE `ride`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
