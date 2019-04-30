@@ -1,6 +1,5 @@
 <?php
 require 'configurations/config.php';
-
 if (isset($_SESSION['username'])) {
 	$user_signin = $_SESSION['username'];
 	$user_detail_query = mysqli_query($con, "SELECT * FROM users WHERE username = '$user_signin';");
@@ -8,7 +7,6 @@ if (isset($_SESSION['username'])) {
 } else {
 	header("Location: signup.php");
 }
-
 ?>
 
 <html>
@@ -46,24 +44,32 @@ if (isset($_SESSION['username'])) {
 <?php
 	$conn = mysqli_connect("localhost", "root", "", "rsb");
 	
-	$from = "";
+	$start = "";
 	$destination = "";
-	
+	$post_at_to_date = "";
 	$queryCondition1 = "";
-	if(!empty($_POST["search"]["from"])) {
-			$from = $_POST["search"]["from"];
-			list($from) = explode("-",$_POST["search"]["from"]);
-			$from1 = "$from";
-		
-		
+		$post_at_todate = date('Y-m-d');
+		if(!empty($_POST["search"]["post_at_to_date"])) {
+			$post_at_to_date = $_POST["search"]["post_at_to_date"];
+			list($tid,$tim,$tiy) = explode("-",$_POST["search"]["post_at_to_date"]);
+			$post_at_todate = "$tiy-$tim-$tid";
+		}			
+
+	
+		if(!empty($_POST["search"]["start"])) {
+			$start = $_POST["search"]["start"];
+			list($start) = explode("-",$_POST["search"]["start"]);
+			$start1 = "$start";
+		}
+
 		if(!empty($_POST["search"]["destination"])) {
 			$destination = $_POST["search"]["destination"];
 			list($destination) = explode("-",$_POST["search"]["destination"]);
 			$destination1 = "$destination";
 		}
 		
-		$queryCondition .= "WHERE destination like '$destination'";
-	}
+		$queryCondition .= "WHERE start like '$start' AND destination like '$destination' AND ridedate like '$post_at_todate'";
+	
 	if($_POST)
 	{
 	$sql = "SELECT * from posts " . $queryCondition . " ORDER BY ridedate asc";
@@ -87,14 +93,11 @@ if (isset($_SESSION['username'])) {
   padding: 10px 30px;
   margin: 10px 2;
   
-
   border-radius: 15px;
   box-sizing: border-box;
   .destination{center
   
 }
-
-
 	</style>
 	</head>
 	
@@ -104,14 +107,133 @@ if (isset($_SESSION['username'])) {
     <div class="filter-ride">
 	<br>
 	<br><br>
+		</div>
 		<h2 align="center" class="Searh4Ride">Search for a Ride!</h2>
+		<h4 align="center">Select desired leaving date, starting location, and destination to being your search!</h4>
   <form name="frmSearch" method="post" action="">
 	 <p align="center" class="search_input">
 	
-		
-		<input type="text" placeholder="Search From starting Location" id="from" name="search[from]"  value="<?php echo $from; ?>" class="input-control" />
-	    <input type="text" placeholder="To Destination" id="destination" name="search[destination]" style="margin-left:10px"  value="<?php echo $destination; ?>" class="input-control"  />			 
-		<input type="submit" name="go" value="Search" >
+	    <input type="text" placeholder="To Date" id="post_at_to_date" name="search[post_at_to_date]" style="margin-left:10px"  value="<?php echo $post_at_to_date; ?>" class="input-control"  /><input type="text" placeholder="Search from starting location" id="start" name="search[start]" style="margin-left:10px"  value="<?php echo $start; ?>" class="input-control"  />	
+	    <input type="text" placeholder="To Destination" id="destination" name="search[destination]" style="margin-left:10px"  value="<?php echo $destination; ?>" class="input-control"  />		 
+<button class="bttn-jelly bttn-md bttn-danger" type="submit" name="go">Search</button>
+<style>
+/* Found this style for button online at https://bttn.surge.sh/ 
+* RSB takes no credit for the style for this search button. 
+*/
+charset "UTF-8";
+/*!
+ *	
+ * bttn.css - https://ganapativs.github.io/bttn.css
+ * Version - 0.2.4
+ * Demo: https://bttn.surge.sh
+ *
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2016 Ganapati V S (@ganapativs)
+ *
+ */
+/* standalone - .bttn-jelly */
+.bttn-default {
+  color: #ff0000;
+}
+
+.bttn-md
+{
+  color: #1d89ff;
+}
+
+.bttn-danger {
+  color: #ff0000;
+}
+
+.bttn-md
+{
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background: transparent;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+
+
+.bttn-md {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+}
+
+}
+.bttn-jelly {
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background: transparent;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+  overflow: hidden;
+  border-radius: 50px;
+  background: #fff;
+  color: #1d89ff;
+  -webkit-transition: all 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.bttn-jelly:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  background: currentColor;
+  content: '';
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: all 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2);
+}
+.bttn-jelly:hover,
+.bttn-jelly:focus {
+  box-shadow: 0 1px 8px rgba(58,51,53,0.4);
+  -webkit-transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+.bttn-jelly:hover:before,
+.bttn-jelly:focus:before {
+  opacity: 0.15;
+  -webkit-transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.bttn-jelly.bttn-md {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+}
+.bttn-jelly.bttn-md:hover,
+.bttn-jelly.bttn-md:focus {
+  box-shadow: 0 1px 8px rgba(58,51,53,0.4);
+}
+
+
+.bttn-jelly.bttn-danger {
+  background: #ff0000;
+  color: #fff;
+}
+</style>
+
 		
 	
  
@@ -139,9 +261,9 @@ if (isset($_SESSION['username'])) {
         <tr>
 			
 			<td><?php echo $row["owner"]; ?></td>
-			<td><?php echo $row["from"]; ?></td>
+			<td><?php echo $row["start"]; ?></td>
 			<td><?php echo $row["destination"]; ?></td>
-			<td><?php echo $row["price"]; ?></td>
+			<td><?php echo "$", $row["price"]; ?></td>
 			<td><?php echo $row["ridedate"]; ?></td>
 			<td><?php echo $row["ridetime"]; ?></td>
 			<td><?php echo $row["body"]; ?></td>
@@ -162,7 +284,19 @@ if (isset($_SESSION['username'])) {
   </form>
   </div>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
+<script>
+$.datepicker.setDefaults({
+showOn: "button",
+buttonImage: "datepicker.png",
+buttonText: "Date Picker",
+buttonImageOnly: true,
+dateFormat: 'dd-mm-yy'  
+});
+$(function() {
+$("#post_at").datepicker();
+$("#post_at_to_date").datepicker();
+});
+</script>
 	
 	<div>
 
