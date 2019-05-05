@@ -9,10 +9,9 @@ if (isset($_SESSION['username'])) {
 	header("Location: signup.php");
 }
 
-$time = date('Y-m-d H:i:s');
 $comment = mysqli_real_escape_string($con, utf8_encode($_POST['new_text']));
-$query = "insert into `rsb`.`comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES (NULL, '$comment', '$user_signin', 'vc', '$time', '1');";
-echo "insert into `rsb`.`comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES (NULL, '$comment', '$user_signin', 'vc', '$time', '1');";
+$query = "insert into `rsb`.`comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES (NULL, '$comment', '$user_signin', 'vc', '2019-02-26 00:00:00', '1');";
+echo "insert into `rsb`.`comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES (NULL, '$comment', '$user_signin', 'vc', '2019-02-26 00:00:00', '1');";
 mysqli_query($con, "UPDATE users SET num_posts = num_posts + 1 WHERE username = '$user_signin';");
 if(mysqli_query($con, $query))
 {

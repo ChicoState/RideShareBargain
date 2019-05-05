@@ -53,6 +53,9 @@
 				$profile_pic = $user_row['profile_pic'];
 				?>
 				<script>
+					function chat($username) {
+						redirectTo('http://localhost:8080/RideShareBargain/chatting.php?name_of_user=<?php echo $owner;?>');
+					}
 					function toggle<?php echo $id;?>() {
 						if (document.getElementById("toggleComment<?php echo $id;?>").style.display == "block")
 							document.getElementById("toggleComment<?php echo $id;?>").style.display = "none";
@@ -62,20 +65,23 @@
 				</script>
 				<?php
 
-				$str = $str . "<hr><div class='status_post' onClick='javascript:toggle$id()'>
+				$str = $str . "<hr><div class='status_post' >
 								<div class='post_profile_pic'>
 									<img src='$profile_pic' width='50'>
 								</div>
 								<div class='posted_by' style='color:#ACACAC;'>
 									<a href='$owner'> $firstname $lastname </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;$date_time
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a id='chat' href='http://localhost:8080/RideShareBargain/chatting.php?name_of_user=$owner'>chat</a>
 								</div>
 								<div id='post_body'>
 									$body
 									<br>
 								</div>
-								<div class = 'com'>
-									<i class='fas fa-comment-dots' style='margin-right: 5px;'></i>comment
+								<div class = 'com' onClick='javascript:toggle$id()'>
+									<i class='fas fa-comment-dots' style='margin-right: 5px;'>comment</i>
 								</div>
+								<br>	
 							</div>
 							<div class='post_comment' id='toggleComment$id' style='display:none;'>
 								<iframe src='comment.php?post_id=$id' id='comment' frameborder='0'></iframe>

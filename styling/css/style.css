@@ -235,3 +235,13 @@ nav a:hover {
     text-align: center;
 	text-decoration: none;
 }
+
+#chat {
+	font-size: 12px;
+	width: 100px;
+	right: 10px;
+	padding: 5px;
+	border-radius: 10px;
+	color: white;
+	background-color: black;
+}

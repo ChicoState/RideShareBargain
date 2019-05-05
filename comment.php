@@ -61,7 +61,10 @@
 							<b><?php echo $object_user->get_first_last_name(); ?></b>
 						</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<?php echo $date . "<br>" . $comment_body; ?>
+						<?php echo $date; ?>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a id="chat" href='http://localhost:8080/RideShareBargain/chatting.php?name_of_user=<?php echo $owner; ?>' target="_blank">chat</a><br> 
+						<?php echo $comment_body; ?>
 					</div>
 					<?php
 				}
