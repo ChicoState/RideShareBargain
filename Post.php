@@ -6,7 +6,7 @@
 			$this->con = $con;
 			$this->object_user = new User($con, $user);
 		}
-		public function submit_post($body, $user_to) {
+		public function submit_post($body,$from,$destination,$price,$ridedate,$time, $user_to) {
 			//echo $body;
 			$body = strip_tags($body);
 			$body = mysqli_real_escape_string($this->con, $body);
@@ -17,7 +17,7 @@
 					$user_to = "none";
 				}
 				$date = date("Y-m-d H:i:s");
-				$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$get_user', '$user_to', '$date', 'no', 'no', '0')");
+				$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$from','$destination','$price','$ridedate','$time','$body', '$get_user', '$user_to', '$date', 'no', 'no', '0')");
 				$id = mysqli_insert_id($this->con);
 				$num_posts = $this->object_user->get_num_posts();
 				$num_posts++;
@@ -29,8 +29,14 @@
 			$user_n = $this->object_user->get_user();
 			$data = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' ORDER BY id DESC");
 			while ($row = mysqli_fetch_array($data)) {
+
 				$id = $row['id'];
 				$body = $row['body'];
+				$from=$row['start'];
+				$destination=$row['destination'];
+				$price=$row['price'];
+				$ridedate=$row['ridedate'];
+				$time=$row['ridetime'];
 				$date_time = $row['date'];
 				$owner = $row['owner'];
 				if ($row['reciever'] == "none") {
@@ -70,7 +76,8 @@
 									<a href='$owner'> $firstname $lastname </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;$date_time
 								</div>
 								<div id='post_body'>
-									$body
+									$from ===> $destination : $ridedate at $time Price : $price$
+									more information : $body
 									<br>
 								</div>
 								<div class = 'com'>
