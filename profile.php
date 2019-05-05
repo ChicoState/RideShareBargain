@@ -53,14 +53,13 @@ if (isset($_SESSION['username'])) {
 					<img id="pro_img" src="<?php echo $user['profile_pic'];?>">
 				</a>
 				<div class="index_user_profile">
-					<a href="<?php echo $user_signin;?>">
+					<a href="profile.php">
 						<?php
 							echo $user['firstname'] . " " . $user['lastname'] . "<br>";
 						?>
 					</a>
 					<div class=profile_info_p>
 						<p><?php echo "Posts  : " . $user['num_posts'];?></p>
-						<p><?php echo "Followers : " . $num_followers;?></p>
 						<p><?php echo "Driver Rating : " . $user['rating_driver']?></p>
 						<p><?php echo "Rider Rating : " . $user['rating_rider'];?></p>
 					</div>
@@ -68,26 +67,14 @@ if (isset($_SESSION['username'])) {
 			</div>
 		</div>
 		<div class="newsfeed column">
-			<?php echo $username; ?>
-			<!-- <form class="create_post" action="addComment.php" method="POST">
-				<textarea name="new_text" id="new_text" placeholder="What's on your mind, <?php echo $user['firstname'];?>?"></textarea>
-				<input type="submit" name="new_post" id="post_button" value="Post">
-			</form> -->
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+    				Select image to upload:
+    				<input type="file" name="fileToUpload" id="fileToUpload">
+    				<input type="submit" value="Upload Image" name="submit">
+			</form>
+		
 		</div>
-		<!-- <table>
-			<?php
-				echo $username;
-				// $sql = "SELECT content FROM comments WHERE owner = '$user_signin '";
-				// $query = mysqli_query($con, $sql);
-				// while ($row = mysqli_fetch_row($query)) {
-				// 	echo "<tr>";
-				// 	echo ('<div class="newsfeed column">');
-				//   echo stripslashes(utf8_decode($row[0]));
-				// }
-				// echo "</div>";
-				// echo "</tr>";
-			?>
-		</table> -->
+		
 	</div>
 </body>
 </html>

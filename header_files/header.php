@@ -39,7 +39,7 @@ if (isset($_SESSION['username'])) {
 			<a href="index.php"><i class="fas fa-home"></i></a>
 			<a href="#"><i class="fas fa-bell"></i></a>
 			<a href="#"><i class="fas fa-envelope"></i></a>
-			<a href="#"><i class="fas fa-car-alt"></i></a>
+			<a href="filter.php"><i class="fas fa-car-alt"></i></a>
 			<a href="#"><i id="settings" class="fas fa-cog"></i></a>
 			<a href="signout.php"><i class="fas fa-sign-out-alt"></i></a>
 		</nav>
