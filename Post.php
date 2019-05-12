@@ -96,6 +96,7 @@
 							";
 			}
 			echo $str;
+			return $str;
 		}
 
 	}
