@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2019 at 12:24 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: May 12, 2019 at 10:06 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `rsb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL,
+  `user_send` varchar(60) NOT NULL,
+  `user_recv` varchar(60) NOT NULL,
+  `body` text NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`id`, `user_send`, `user_recv`, `body`, `date`) VALUES
+(1, 'smitkumar_contractor', 'guddu_conti', 'hello', '2019-05-11 17:20:41');
 
 -- --------------------------------------------------------
 
@@ -42,9 +63,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `content`, `owner`, `reciever`, `date`, `post_id`) VALUES
-(1, 'anis', 'anis_sahnoun', 'vc', '2019-02-26 00:00:00', 1),
-(2, 'kais', 'anis_sahnoun', 'anis_sahnoun', '2019-04-08 15:06:11', 1),
-(3, '', 'brandon_ekbatani', 'brandon_ekbatani', '2019-04-29 00:14:03', 15);
+(4, 'i\'m interested. i will pay max 90$.', 'guddu_conti', 'smitkumar_contractor', '2019-05-11 12:41:37', 17),
+(5, 'okay! i will reserve your seat!', 'smitkumar_contractor', 'smitkumar_contractor', '2019-05-11 12:42:09', 17);
 
 -- --------------------------------------------------------
 
@@ -85,10 +105,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `start`, `destination`, `price`, `ridedate`, `ridetime`, `body`, `owner`, `reciever`, `date`, `user_closed`, `deleted`, `likes`) VALUES
-(12, 'Torrance', 'Redondo Beach', 5, '2019-04-23', '01:00:00', 'no pets', 'anis_sahnoun', 'none', '2019-04-22 17:48:48', 'no', 'no', 0),
-(13, 'Chico', 'Sacramento', 45, '2019-04-26', '13:00:00', 'no smokers', 'anis_sahnoun', 'none', '2019-04-22 17:50:08', 'no', 'no', 0),
-(14, 'Chico', 'SF', 50, '2019-04-25', '13:00:00', 'No pets', 'anis_sahnoun', 'none', '2019-04-23 11:23:27', 'no', 'no', 0),
-(15, 'Wyoming ', 'Venice', 30, '2019-04-27', '13:00:00', 'no pets', 'brandon_ekbatani', 'none', '2019-04-24 12:11:16', 'no', 'no', 0);
+(16, 'Chico', 'Sacramento', 100, '2019-05-22', '02:00:00', 'No pets.', 'smitkumar_contractor', 'none', '2019-05-11 11:53:28', 'no', 'no', 0),
+(17, 'Chico', 'Sacramento', 120, '2019-05-14', '02:01:00', 'No snakes.', 'smitkumar_contractor', 'none', '2019-05-11 12:00:05', 'no', 'no', 0),
+(18, 'Chico', 'SF', 100, '2019-05-12', '01:00:00', 'No drinks.', 'guddu_conti', 'none', '2019-05-11 12:01:33', 'no', 'no', 0);
 
 -- --------------------------------------------------------
 
@@ -138,16 +157,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `num_posts`, `user_closed`, `rating_driver`, `rating_rider`, `followers_array`) VALUES
-(19, 'Anis', 'Sahnoun', 'anis_sahnoun', 'anis@hotmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-07', 'styling/img/profile_pic/0351850eee7b88e11cd8d2c2f414f463.jpg', 9, 'no', 0, 0, ','),
-(20, 'Smit', 'Con', 'smit_con', 'smit@gmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-08', 'styling/img/profile_pic/default_pics/default.png', 1, 'no', 0, 0, ','),
-(21, 'Anis', 'Sahnoun', 'anis_sahnoun_1', 'asahnoun@mail.csuchico.edu', '6a69c91295821e0db570839718f759a1', '2019-04-10', 'styling/img/profile_pic/007712303a96706e6acb32d08528dda6.jpg', 2, 'no', 0, 0, ','),
-(22, 'Anis', 'Sahnoun', 'anis_sahnoun_1_2', 'sahnoun@mail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-10', 'styling/img/profile_pic/a366e0979d9742328a8aac4035d4db78.jpg', 1, 'no', 0, 0, ','),
-(24, 'Anis', 'Sahnoun', 'anis_sahnoun_1_2_3', 'anis@gmail.com', '65903f5dfcccfaf9add6653fd57a5cef', '2019-04-10', 'styling/img/profile_pic/0a7a9cb73572727064c434fbb6cb2835.jpg', 1, 'no', 0, 0, ','),
-(25, 'Brandon', 'Ekbatani', 'brandon_ekbatani', 'dummy@mail.com', 'b64093964d277ba6415719648594ef3a', '2019-04-28', 'styling/img/profile_pic/default_pics/default.png', 6, 'no', 0, 0, ',');
+(32, 'Smitkumar', 'Contractor', 'smitkumar_contractor', 'smitcontractor@gmail.com', 'af69ec0d459d14bee97dadaff0ca23e7', '2019-05-11', 'styling/img/profile_pic/default_pics/default.png', 2, 'no', 0, 0, ',guddu_conti,'),
+(33, 'Guddu', 'Conti', 'guddu_conti', 'guddu@gmail.com', 'faaa2828bbe0c1a9be6637ee2420d11c', '2019-05-11', 'styling/img/profile_pic/default_pics/default.png', 1, 'no', 0, 0, ',smitkumar_contractor,'),
+(34, 'Lalu', 'Ji', 'lalu_ji', 'lalu@gmail.com', '72768226989056dc016522e198f4ae41', '2019-05-11', 'styling/img/profile_pic/default_pics/default.png', 0, 'yes', 0, 0, ',');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `comments`
@@ -184,10 +206,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -199,7 +227,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ride`
@@ -211,7 +239,7 @@ ALTER TABLE `ride`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
